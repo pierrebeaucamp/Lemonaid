@@ -6,7 +6,7 @@ Make sure you have Python [installed properly](http://install.python-guide.org).
 
 ```sh
 $ git clone git@github.com:pierrebeaucamp/Lemonaid.git
-$ cd lemonaid
+$ cd Lemonaid
 $ pip install -r requirements.txt
 $ createdb lemonaid
 $ heroku local:run python manage.py migrate

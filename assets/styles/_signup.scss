@@ -5,11 +5,13 @@
 	.step-container {
 		position: relative;
 		overflow: hidden;
+		min-height: 230px;
 	
 		.templates-container {
-			position: relative;
-			float: left;
-			//width: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
 		}
 		.ng-enter {
 			transition: 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) all;
@@ -24,10 +26,24 @@
 			left: 0%;
 		}
 		.ng-leave {
-			right: 0%;
+			left: 0%;
 		}
 		.ng-leave.ng-leave-active {
-			right: 100%;
+			left: -100%;
+		}
+	}
+	
+	.steps-nav {
+		margin-bottom: 0;
+		padding: 0;
+		list-style: none;
+
+		li {
+			display: inline-block;
+			padding: 10px;
+		}
+		.current-step {
+			color: red;
 		}
 	}
 }

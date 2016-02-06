@@ -124,6 +124,7 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'templates'),
     os.path.join(BASE_DIR, "bower_components"),
     os.path.join(BASE_DIR, "dist"),
 )

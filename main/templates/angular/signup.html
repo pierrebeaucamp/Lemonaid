@@ -1,0 +1,30 @@
+<div id="signup-container">
+	<div class="row">
+		<div class="col-sm-12">
+			<h1>Signup</h1>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="step-container">
+				<div ng-include="stepTemplates[currentStep]" class="templates-container"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="clearfix">
+				<div class="pull-left" ng-click="moveStep(-1)">Prev</div>
+				<div class="pull-left" ng-click="moveStep(1)">Next</div>
+			</div>
+
+			<ul class="steps-nav">
+				<li ng-repeat="steps in stepTemplates track by $index" ng-click="moveToStep($index)" ng-class="{ 'current-step': $index === currentStep}">
+					{{$index + 1}}
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

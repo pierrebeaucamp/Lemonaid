@@ -1,15 +1,23 @@
+$brand-primary: rgb(231, 35, 0);
+
 html {
 	font-size: 16px;
 }
 
 body {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
 	font-size: 16px;
+	background-color: $brand-primary;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 	display: none !important;
+}
+
+h1, h2, h3, h4 {
+	font-weight: 700;
+	margin: 0 0 20px 0;
 }
 
 #main-wrapper {
@@ -20,6 +28,53 @@ body {
 	max-width: 1350px;
 }
 
+.nav {
+	.menu {
+		margin-bottom: 0;
+		padding: 0;
+		list-style: none;
 
+		li {
+			display: inline-block;
+			padding: 5px;
+			margin-right: 10px;
+		}
+	}
+}
+
+button {
+	-webkit-appearance: none;
+}
+
+.round-btn {
+	border-radius: 6px;
+	background: #efefef;
+	border: none;
+	text-align: center;
+	min-width: 260px;
+	color: #333;
+	height: 50px;
+	line-height: 50px;
+	font-size: 18px;
+	padding: 0 10px;
+
+	&.facebook {
+		background: rgb(45, 69, 136);
+		color: #fff;
+	}
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+	background-color: white;
+	border: none;
+	padding: 20px 10px;
+	width: 100%;
+	max-width: 400px;
+	outline: none;
+}
+
+@import "_home.scss";
 @import "_login.scss";
 @import "_signup.scss";

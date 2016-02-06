@@ -1,4 +1,10 @@
 form[name="loginForm"] {
 	max-width: 600px;
 	margin: 0 auto;
+
+	&.ng-invalid.ng-submitted {
+		input.ng-pristine.ng-invalid {
+			border: 1px solid red;
+		}
+	}
 }

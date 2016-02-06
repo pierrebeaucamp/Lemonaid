@@ -1,0 +1,33 @@
+#homepage {
+	.logos {
+		padding: 0 10px;
+	}
+	form[name="homeForm"] {
+		border-radius: 6px;
+	    overflow: hidden;
+	    margin: 30px 0;
+
+		fieldset:not(:last-child) {
+			border-bottom: 1px solid #000;
+		}
+	}
+	.login-options {
+		text-align: center;
+	}
+	.spacer {
+		margin: 8px 0;
+		color: #fff;
+		font-size: 26px;
+		font-weight: 500;
+	}
+	.slogan {
+		color: #fff;
+		font-size: 22px;
+		margin-top: 20px;
+
+		img {
+			max-width: 220px;
+		    margin: 0 auto;
+		}
+	}
+}

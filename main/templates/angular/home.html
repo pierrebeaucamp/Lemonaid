@@ -1,0 +1,40 @@
+<div id="homepage">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+			<div class="logos">
+				<img src="/static/images/Lemon.png" alt="Lemonaid Logo" class="img-responsive">
+			</div>
+
+			<form name="homeForm" ng-submit="" novalidate>
+			    <fieldset>
+			    	<input name="amount" placeholder="How much do you need?" type="text" ng-model="info.amount" autofocus required>
+			    </fieldset>
+
+			    <fieldset>
+			    	<input name="employed" placeholder="Are you currently employed?" type="text" ng-model="credentials.employed" required>
+			    </fieldset>
+
+				<fieldset>
+			    	<input name="rate" placeholder="What is your interest rate?" type="text" ng-model="credentials.rate" required>
+			    </fieldset>
+
+			    <fieldset>
+			    	<input name="score" placeholder="Estimate your credit score" type="text" ng-model="credentials.score" required>
+			    </fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div class="row login-options">
+		<div class="col-sm-12">
+			<button class="round-btn facebook">Log in with Facebook</button>
+			<div class="spacer">or</div>
+			<button class="round-btn">Sign in</button>
+		</div>
+
+		<div class="col-sm-12 slogan">
+			<p>When life gives you high interest loans, use</p>
+			<img src="/static/images/Lemon.png" alt="Lemonaid Logo" class="img-responsive">
+		</div>
+	</div>
+</div>

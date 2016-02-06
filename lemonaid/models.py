@@ -6,6 +6,7 @@ from datetime import timedelta
 
 # Create your models here.
 
+
 class UserProfile(models.Model):
     TITLE_CHOICES = (
         ('mr', 'Mr'),
@@ -25,6 +26,11 @@ class UserProfile(models.Model):
         ('lease', 'Lease'),
     )
 
+    USER_TYPE_CHOICES = (
+        ('d', 'debtor'),
+        ('c', 'creditor'),
+    )
+
     user = models.OneToOneField(User)
 
     bank_key = models.CharField(blank=True, null=True, max_length=254)
@@ -37,14 +43,14 @@ class UserProfile(models.Model):
     province = models.CharField(max_length=254)
     postal_code = models.CharField(max_length=6)
     residential_status = models.CharField(max_length=254, choices=RESIDENTIAL_STATUS_CHOICES)
-
+    type = models.CharField(max_length=254, choices=USER_TYPE_CHOICES)
     creditor_balance = models.FloatField(blank=True, null=True)
 
     def __unicode__(self):
         return self.user.username
 
 
-class Flow(models.Model):
+class CashFlow(models.Model):
     DURATION_TYPE_CHOICES = (
         ('m', 'Monthly Amount'),
         ('a', 'Annual Amount'),
@@ -60,12 +66,35 @@ class Flow(models.Model):
     flow_type = models.CharField(max_length=254, choices=FLOW_TYPE_CHOICES)
     duration_type = models.CharField(max_length=254, choices=DURATION_TYPE_CHOICES)
     amount = models.FloatField()
+    date = models.DateField()
 
 
-class Loan(models.Model):
+class SingleLoan(models.Model):
     profile = models.ForeignKey(UserProfile)
     amount = models.FloatField()
     interest = models.FloatField()
     duration = models.DurationField(default=timedelta(weeks=52))
 
 
+class PoolLoan(models.Model):
+    profile = models.ForeignKey(UserProfile)
+    amount = models.FloatField()
+    interest = models.FloatField()
+    duration = models.DurationField(default=timedelta(weeks=52))
+
+
+class Pool(models.Model):
+    TYPE_CHOICES = (
+        ('l', 'Low'),
+        ('m', 'Medium'),
+        ('h', 'High'),
+    )
+    type = models.CharField(max_length=254, choices=TYPE_CHOICES, default='Low')
+    interest_rate = models.FloatField()
+    amount = models.FloatField()
+
+
+class DebitorLoan(models.Model):
+    profile = models.ForeignKey(UserProfile)
+    single_loan = models.ManyToManyField(SingleLoan, blank=True, null=True)
+    pool_loan = models.ManyToManyField(PoolLoan, blank=True, null=True)

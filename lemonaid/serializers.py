@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from django.contrib.auth.models import User, Group
 
-from lemonaid.models import UserProfile, Flow, Loan
+from lemonaid.models import UserProfile, CashFlow, SingleLoan, PoolLoan, Pool, DebitorLoan
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -24,23 +24,48 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ('bank_key', 'title', 'date_of_birth', 'marital_status', 'sin',
-                  'address', 'city', 'province', 'postal_code', 'residential_status',
+                  'address', 'city', 'province', 'postal_code', 'residential_status', 'type',
                   'user',)
 
 
 # Serializers define the API representation.
-class FlowSerializer(serializers.ModelSerializer):
+class CashFlowSerializer(serializers.ModelSerializer):
     profile = serializers.HyperlinkedRelatedField(view_name='UserProfiles-detail', queryset=UserProfile.objects.all())
 
     class Meta:
-        model = Flow
-        fields = ('profile', 'name', 'flow_type', 'duration_type', 'amount',)
+        model = CashFlow
+        fields = ('profile', 'name', 'flow_type', 'duration_type', 'amount', 'date',)
 
 
 # Serializers define the API representation.
-class LoanSerializer(serializers.ModelSerializer):
+class SingleLoanSerializer(serializers.ModelSerializer):
     profile = serializers.HyperlinkedRelatedField(view_name='UserProfiles-detail', queryset=UserProfile.objects.all())
 
     class Meta:
-        model = Loan
+        model = SingleLoan
         fields = ('profile', 'amount', 'interest', 'duration',)
+
+
+# Serializers define the API representation.
+class PoolLoanSerializer(serializers.ModelSerializer):
+    profile = serializers.HyperlinkedRelatedField(view_name='UserProfiles-detail', queryset=UserProfile.objects.all())
+
+    class Meta:
+        model = PoolLoan
+        fields = ('profile', 'amount', 'interest', 'duration',)
+
+
+# Serializers define the API representation.
+class PoolSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pool
+        fields = ('type', 'interest_rate', 'amount',)
+
+
+# Serializers define the API representation.
+class DebitorLoanSerializer(serializers.ModelSerializer):
+    profile = serializers.HyperlinkedRelatedField(view_name='UserProfiles-detail', queryset=UserProfile.objects.all())
+
+    class Meta:
+        model = DebitorLoan
+        fields = ('profile', 'single_loan', 'pool_loan',)

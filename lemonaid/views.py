@@ -2,8 +2,8 @@ from rest_framework import viewsets
 
 from django.contrib.auth.models import User, Group
 
-from lemonaid.models import UserProfile, Flow, Loan
-from lemonaid.serializers import UserProfileSerializer, UserSerializer, GroupSerializer, FlowSerializer, LoanSerializer
+from lemonaid.models import UserProfile, CashFlow, SingleLoan, PoolLoan, Pool, DebitorLoan
+from lemonaid.serializers import UserProfileSerializer, UserSerializer, GroupSerializer, CashFlowSerializer, SingleLoanSerializer, PoolLoanSerializer, PoolSerializer, DebitorLoanSerializer
 
 
 # Create your views here.
@@ -30,12 +30,28 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 
 
 # ViewSets define the view behavior.
-class FlowViewSet(viewsets.ModelViewSet):
-    queryset = Flow.objects.all()
-    serializer_class = FlowSerializer
+class CashFlowViewSet(viewsets.ModelViewSet):
+    queryset = CashFlow.objects.all()
+    serializer_class = CashFlowSerializer
 
 
 # ViewSets define the view behavior.
-class LoanViewSet(viewsets.ModelViewSet):
-    queryset = Loan.objects.all()
-    serializer_class = LoanSerializer
+class SingleLoanViewSet(viewsets.ModelViewSet):
+    queryset = SingleLoan.objects.all()
+    serializer_class = SingleLoanSerializer
+
+
+# ViewSets define the view behavior.
+class PoolLoanViewSet(viewsets.ModelViewSet):
+    queryset = PoolLoan.objects.all()
+    serializer_class = PoolLoanSerializer
+
+
+class PoolViewSet(viewsets.ModelViewSet):
+    queryset = Pool.objects.all()
+    serializer_class = PoolSerializer
+
+
+class DebitorLoanViewSet(viewsets.ModelViewSet):
+    queryset = DebitorLoan.objects.all()
+    serializer_class = DebitorLoanSerializer

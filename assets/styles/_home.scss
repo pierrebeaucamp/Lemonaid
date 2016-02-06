@@ -1,6 +1,10 @@
 #homepage {
 	background-color: $brand-primary;
 
+    .container-fluid {
+        padding-bottom: 40px;
+    }
+
 	.logos {
 		padding: 0 10px;
 	}

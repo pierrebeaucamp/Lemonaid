@@ -1,3 +1,4 @@
+from django.db.models import Sum, F
 from rest_framework import serializers
 
 from django.contrib.auth.models import User, Group
@@ -20,30 +21,29 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 # Serializers define the API representation.
 class UserProfileSerializer(serializers.ModelSerializer):
     user = serializers.HyperlinkedRelatedField(view_name='user-detail', queryset=User.objects.all())
-    pool = serializers.SerializerMethodField()
+    single_loan_total = serializers.SerializerMethodField(read_only=True)
 
-    def get_pool(self, obj):
-        return obj.dgddfhgdkjf()
+    def get_single_loan_total(self, obj):
+        return obj.get_single_loan_total()
 
     class Meta:
         model = UserProfile
         fields = ('bank_key', 'title', 'date_of_birth', 'marital_status', 'sin',
                   'address', 'city', 'province', 'postal_code', 'residential_status', 'type',
-                  'user', 'pool',)
+                  'user', 'single_loan_total',)
 
 # Serializers define the API representation.
 class UserProfileNoHyperlinkSerializer(serializers.ModelSerializer):
-    pool = serializers.SerializerMethodField()
+    single_loan_total = serializers.SerializerMethodField(read_only=True)
 
-    def get_pool(self, obj):
-        return obj.dgddfhgdkjf()
+    def get_single_loan_total(self, obj):
+        return obj.get_single_loan_total()
 
     class Meta:
         model = UserProfile
         fields = ('bank_key', 'title', 'date_of_birth', 'marital_status', 'sin',
                   'address', 'city', 'province', 'postal_code', 'residential_status', 'type',
-                  'pool',)
-
+                  'single_loan_total')
 
 
 # Serializers define the API representation.
@@ -55,22 +55,32 @@ class CashFlowSerializer(serializers.ModelSerializer):
         fields = ('profile', 'name', 'flow_type', 'duration_type', 'amount', 'date',)
 
 
+class DebitorLoanSerializer(serializers.ModelSerializer):
+    debitor = serializers.HyperlinkedRelatedField(view_name='UserProfiles-detail', queryset=UserProfile.objects.filter(type='d'))
+
+    class Meta:
+        model = DebitorLoan
+        fields = ('debitor', 'amount',)
+
+
 # Serializers define the API representation.
 class SingleLoanSerializer(serializers.ModelSerializer):
-    profile = serializers.HyperlinkedRelatedField(view_name='UserProfiles-detail', queryset=UserProfile.objects.all())
+    creditor = serializers.HyperlinkedRelatedField(view_name='UserProfiles-detail', queryset=UserProfile.objects.filter(type='c'))
+    debitor = serializers.HyperlinkedRelatedField(view_name='UserProfiles-detail', queryset=UserProfile.objects.filter(type='d'))
 
     class Meta:
         model = SingleLoan
-        fields = ('profile', 'amount', 'interest', 'duration',)
+        fields = ('creditor', 'debitor', 'amount', 'interest', 'duration',)
 
 
 # Serializers define the API representation.
 class PoolLoanSerializer(serializers.ModelSerializer):
-    profile = serializers.HyperlinkedRelatedField(view_name='UserProfiles-detail', queryset=UserProfile.objects.all())
+    creditor = serializers.HyperlinkedRelatedField(many=True, view_name='UserProfiles-detail', queryset=UserProfile.objects.filter(type='c'))
 
     class Meta:
         model = PoolLoan
-        fields = ('profile', 'amount', 'interest', 'duration',)
+        fields = ('creditor', 'amount', 'interest', 'duration',)
+
 
 
 # Serializers define the API representation.
@@ -79,11 +89,3 @@ class PoolSerializer(serializers.ModelSerializer):
         model = Pool
         fields = ('type', 'interest_rate', 'amount',)
 
-
-# Serializers define the API representation.
-class DebitorLoanSerializer(serializers.ModelSerializer):
-    profile = serializers.HyperlinkedRelatedField(view_name='UserProfiles-detail', queryset=UserProfile.objects.all())
-
-    class Meta:
-        model = DebitorLoan
-        fields = ('profile', 'single_loan', 'pool_loan',)

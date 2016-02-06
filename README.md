@@ -10,7 +10,6 @@ $ cd Lemonaid
 $ pip install -r requirements.txt
 $ npm install
 $ createdb lemonaid
-$ heroku git:remote -a rocky-journey-37352
 ```
 
 ## Running locally
@@ -21,8 +20,3 @@ $ ./local.sh
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
 
-## Deploying to Heroku
-
-```sh
-$ ./deploy.sh
-```

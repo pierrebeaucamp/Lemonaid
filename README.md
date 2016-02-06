@@ -8,6 +8,7 @@ Make sure you have Python [installed properly](http://install.python-guide.org).
 $ git clone git@github.com:pierrebeaucamp/Lemonaid.git
 $ cd Lemonaid
 $ pip install -r requirements.txt
+$ npm install
 $ createdb lemonaid
 $ heroku git:remote -a rocky-journey-37352
 ```
@@ -15,10 +16,7 @@ $ heroku git:remote -a rocky-journey-37352
 ## Running locally
 
 ```sh
-$ python manage.py collectstatic
-$ heroku local:run python manage.py makemigrations
-$ heroku local:run python manage.py migrate
-$ heroku local
+$ ./local.sh
 ```
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
@@ -26,8 +24,5 @@ Your app should now be running on [localhost:5000](http://localhost:5000/).
 ## Deploying to Heroku
 
 ```sh
-$ git push heroku master
-$ heroku run python manage.py makemigrations
-$ heroku run python manage.py migrate
-$ heroku open
+$ ./deploy.sh
 ```

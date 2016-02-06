@@ -1,0 +1,34 @@
+#signup-container {
+	max-width: 600px;
+	margin: 0 auto;
+
+	.step-container {
+		position: relative;
+		overflow: hidden;
+	
+		.templates-container {
+			position: relative;
+			float: left;
+			//width: 100%;
+		}
+		.ng-enter {
+			transition: 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) all;
+		}
+		.ng-leave {
+			transition: 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) all;
+		}
+		.ng-enter {
+			left: 100%;
+		}
+		.ng-enter.ng-enter-active {
+			left: 0%;
+		}
+		.ng-leave {
+			right: 0%;
+		}
+		.ng-leave.ng-leave-active {
+			right: 100%;
+		}
+	}
+}
+

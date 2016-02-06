@@ -1,11 +1,13 @@
 from django.conf.urls import include, url
-
 from django.contrib import admin
 admin.autodiscover()
 
 from lemonaid.urls import router
+from . import views
 
 urlpatterns = [
+    url(r'^$', views.index, name='index'),
+
     url(r'^api/', include(router.urls)),
 
     url(r'^login/$', 'django.contrib.auth.views.login',

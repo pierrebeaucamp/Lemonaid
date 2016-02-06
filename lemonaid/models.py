@@ -1,10 +1,12 @@
 from django.db import models
+from django.forms import FloatField
 
 from django.contrib.auth.models import User
 
 from datetime import timedelta
 
 # Create your models here.
+from django.db.models import Count, Sum, F
 
 
 class UserProfile(models.Model):
@@ -49,8 +51,16 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.user.username
 
-    def dgddfhgdkjf(self):
-        return "POOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOL"
+    def __str__(self):
+        return self.user.username
+
+    def get_single_loan_total(self):
+        total_sum = 0
+        if self.type == 'c':
+            loans = SingleLoan.objects.filter(creditor=self)
+            if loans:
+                total_sum = loans.aggregate(total_sum=Sum(F('amount')))['total_sum']
+        return total_sum
 
 
 class CashFlow(models.Model):
@@ -68,22 +78,27 @@ class CashFlow(models.Model):
     name = models.CharField(max_length=254)
     flow_type = models.CharField(max_length=254, choices=FLOW_TYPE_CHOICES)
     duration_type = models.CharField(max_length=254, choices=DURATION_TYPE_CHOICES)
-    amount = models.FloatField()
+    amount = models.FloatField(default=0)
     date = models.DateField()
 
 
 class SingleLoan(models.Model):
-    profile = models.ForeignKey(UserProfile)
-    amount = models.FloatField()
-    interest = models.FloatField()
+    # creditors
+    creditor = models.OneToOneField(UserProfile, null=True, related_name='single_creditor')
+    debitor = models.OneToOneField(UserProfile, null=True, related_name='single_debitor')
+    amount = models.FloatField(default=0)
+    interest = models.FloatField(default=0)
     duration = models.DurationField(default=timedelta(weeks=52))
+    debitor_loan = models.ForeignKey('DebitorLoan', null=True)
 
 
 class PoolLoan(models.Model):
-    profile = models.ForeignKey(UserProfile)
-    amount = models.FloatField()
-    interest = models.FloatField()
+    # creditors
+    creditor = models.ManyToManyField(UserProfile, null=True, related_name='pool_creditor')
+    amount = models.FloatField(default=0)
+    interest = models.FloatField(default=0)
     duration = models.DurationField(default=timedelta(weeks=52))
+    debitor_loan = models.ForeignKey('DebitorLoan', null=True)
 
 
 class Pool(models.Model):
@@ -93,11 +108,9 @@ class Pool(models.Model):
         ('h', 'High'),
     )
     type = models.CharField(max_length=254, choices=TYPE_CHOICES, default='Low')
-    interest_rate = models.FloatField()
-    amount = models.FloatField()
-
+    interest_rate = models.FloatField(default=0)
+    amount = models.FloatField(default=0)
 
 class DebitorLoan(models.Model):
-    profile = models.ForeignKey(UserProfile)
-    single_loan = models.ManyToManyField(SingleLoan, blank=True, null=True)
-    pool_loan = models.ManyToManyField(PoolLoan, blank=True, null=True)
+    amount = models.FloatField(default=0)
+    debitor = models.OneToOneField(UserProfile)

@@ -1,9 +1,11 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
+from rest_framework.response import Response
 
 from django.contrib.auth.models import User, Group
 
 from lemonaid.models import UserProfile, CashFlow, SingleLoan, PoolLoan, Pool, DebitorLoan
-from lemonaid.serializers import UserProfileSerializer, UserSerializer, GroupSerializer, CashFlowSerializer, SingleLoanSerializer, PoolLoanSerializer, PoolSerializer, DebitorLoanSerializer
+from lemonaid.serializers import UserProfileSerializer, UserProfileNoHyperlinkSerializer, UserSerializer, \
+    GroupSerializer, CashFlowSerializer, SingleLoanSerializer, PoolLoanSerializer, PoolSerializer, DebitorLoanSerializer
 
 
 # Create your views here.
@@ -46,17 +48,21 @@ class PoolLoanViewSet(viewsets.ModelViewSet):
     queryset = PoolLoan.objects.all()
     serializer_class = PoolLoanSerializer
 
-    # create
-    # list
-    # retrieve
-    # delete
-    #
+    def update(self, request, *args, **kwargs):
+        data = request.data
+        interest_rate = data['interest_rate']
+        pool_loan = PoolLoan.objects.filter(interest_rate=interest_rate).first()
 
+        if pool_loan:
+            pool_loan.creditor.add(data['creditor'])
+            pool_loan.save()
+            return Response(status=status.HTTP_200_OK)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 class PoolViewSet(viewsets.ModelViewSet):
     queryset = Pool.objects.all()
     serializer_class = PoolSerializer
-
 
 class DebitorLoanViewSet(viewsets.ModelViewSet):
     queryset = DebitorLoan.objects.all()

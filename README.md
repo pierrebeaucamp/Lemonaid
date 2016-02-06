@@ -9,6 +9,7 @@ $ git clone git@github.com:pierrebeaucamp/Lemonaid.git
 $ cd Lemonaid
 $ pip install -r requirements.txt
 $ createdb lemonaid
+$ heroku git:remote -a rocky-journey-37352
 $ heroku local:run python manage.py makemigrations
 $ heroku local:run python manage.py migrate
 ```
@@ -25,7 +26,6 @@ Your app should now be running on [localhost:5000](http://localhost:5000/).
 ## Deploying to Heroku
 
 ```sh
-$ heroku git:remote -a rocky-journey-37352
 $ git push heroku master
 $ heroku open
 ```

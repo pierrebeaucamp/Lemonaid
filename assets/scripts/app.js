@@ -11,9 +11,12 @@ Scotiafront.config(['$routeProvider', function($routeProvider) {
 	}).when('/login/', {
 		templateUrl: 'static/ng-templates/login.html',
 		controller: 'LoginCtrl'
-	}).when('/signup/', {
-		templateUrl: 'static/ng-templates/signup.html',
-		controller: 'SignupCtrl'
+	}).when('/creditinfo/', {
+		templateUrl: 'static/ng-templates/creditinfo.html',
+		controller: 'CreditInfoCtrl'
+	}).when('/profile/:userid?', {
+		templateUrl: 'static/ng-templates/profile.html',
+		controller: 'ProfileCtrl'
 	}).otherwise({
 		redirectTo: '/'
 	});

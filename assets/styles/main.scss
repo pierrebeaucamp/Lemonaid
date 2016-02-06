@@ -24,6 +24,7 @@ h1, h2, h3, h4 {
 #main-wrapper {
 	overflow: hidden;
     min-height: 100%;
+    padding-bottom: 40px;
 }
 
 .container-fluid {
@@ -61,8 +62,11 @@ button {
 	font-size: 18px;
 	padding: 0 10px;
 	text-decoration: none;
+	cursor: pointer;
+	outline: none;
 	
-	&:hover {
+	&:hover,
+	&:visited {
 		text-decoration: none;
 		color: #333;
 	}
@@ -70,9 +74,16 @@ button {
 		background: rgb(45, 69, 136);
 		color: #fff;
 	}
+	&.small {
+		height: 38px;
+		line-height: 38px;
+		font-size: 16px;
+		min-width: 180px;
+	}
 }
 
 input[type="text"],
+input[type="num"],
 input[type="password"],
 input[type="email"] {
 	background-color: white;
@@ -96,7 +107,8 @@ form.bottom-bordered {
 }
 
 .nav {
-	background: $brand-primary;
+	background: #efefef;
+	margin-bottom: 30px;
 
 	img {
 		margin: 10px auto;
@@ -116,6 +128,10 @@ form.bottom-bordered {
 		margin: 10px 0;
 		font-style: italic;
 	}
+}
+
+[ng-click] {
+	cursor: pointer;
 }
 
 @import "_home.scss";

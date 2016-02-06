@@ -1,10 +1,4 @@
 #homepage {
-	background-color: $brand-primary;
-
-    .container-fluid {
-        padding-bottom: 40px;
-    }
-
 	.logos {
 		padding: 0 10px;
 	}
@@ -12,13 +6,11 @@
 		text-align: center;
 	}
 	.spacer {
-		margin: 8px 0;
-		color: #fff;
+		margin: 15px 0;
 		font-size: 26px;
 		font-weight: 500;
 	}
 	.slogan {
-		color: #fff;
 		font-size: 22px;
 		margin-top: 20px;
 
@@ -28,7 +20,6 @@
 		}
 	}
 	.submit {
-		margin-bottom: 30px;
 		text-align: center;
 	}
 }

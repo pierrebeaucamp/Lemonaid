@@ -1,9 +1,9 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-12">
-			<form name="loginForm" ng-submit="attemptLogin()" novalidate>
-				<h1>Login</h1>
+		<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+			<h1>Sign in</h1>
 
+			<form name="loginForm" class="bottom-bordered bordered" novalidate>
 			    <fieldset>
 			    	<input name="email" placeholder="Email Address" type="text" ng-model="credentials.email" autofocus required>
 			    </fieldset>
@@ -11,14 +11,11 @@
 			    <fieldset>
 			    	<input name="password" placeholder="Password" type="password" ng-model="credentials.password" required>
 			    </fieldset>
-
-			    <fieldset>
-			    	<div class="pull-left error-text" ng-if="loginError">
-				    	*{{ loginError }}
-				    </div>
-			    	<input class="" type="submit" value="Login">
-			    </fieldset>
 			</form>
+
+			<div class="tac">
+				<button class="round-btn" ng-click="attemptLogin()">Sign in</button>
+			</div>
 		</div>
 	</div>
 </div>

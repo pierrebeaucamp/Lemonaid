@@ -78,6 +78,21 @@ Scotiafront.service('API', ['$http', function ($http) {
 					alert('ERROR: ' + response.status);
 				}
 			});
+		},
+
+		getUserByID: function(userid) {
+			var obj = {
+				userid: userid
+			};
+
+			return $http.post(baseRoute + '', obj).then(function(response) {
+				if (response.status === 200) {
+					return response.data;
+				}
+				else {
+					alert('ERROR: ' + response.status);
+				}
+			});
 		}
 	};
 }]);

@@ -6,13 +6,13 @@ Scotiafront.config(['$compileProvider', function ($compileProvider) {
 
 Scotiafront.config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/', {
-        templateUrl: 'static/ng-templates/home.html',
+		templateUrl: 'static/ng-templates/home.html',
 		controller: 'HomeCtrl'
 	}).when('/login/', {
-        templateUrl: 'static/ng-templates/login.html',
+		templateUrl: 'static/ng-templates/login.html',
 		controller: 'LoginCtrl'
 	}).when('/signup/', {
-        templateUrl: 'static/ng-templates/signup.html',
+		templateUrl: 'static/ng-templates/signup.html',
 		controller: 'SignupCtrl'
 	}).otherwise({
 		redirectTo: '/'

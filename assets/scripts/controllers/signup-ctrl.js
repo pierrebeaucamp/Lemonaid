@@ -1,9 +1,9 @@
 Scotiafront.controller('SignupCtrl', ['$scope', '$rootScope', 'API', function($scope, $rootScope, API) {
 	$scope.currentStep = 0;
 	$scope.stepTemplates = [
-		'/static/ng-templates/signup/step1.html',
-		'/static/ng-templates/signup/step2.html',
-		'/static/ng-templates/signup/step3.html',
+		'static/ng-templates/signup/step1.html',
+		'static/ng-templates/signup/step2.html',
+		'static/ng-templates/signup/step3.html',
 	];
 
 	$scope.signupData = {
@@ -22,4 +22,10 @@ Scotiafront.controller('SignupCtrl', ['$scope', '$rootScope', 'API', function($s
 	$scope.moveToStep = function(step) {
 		$scope.currentStep = step;
 	};
+
+
+	$scope.info = {};
+
+	$scope.savings = 557;
+	$scope.interest = 6;
 }]);

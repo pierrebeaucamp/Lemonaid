@@ -48,3 +48,44 @@
 	}
 }
 
+.sign-up-page {
+	
+	.header {
+		margin-bottom: 30px;
+	}
+	.jug-cont {
+		min-height: 260px;
+	}
+	.jug {
+		border-radius: 50%;
+		border: 5px solid;
+		width: 160px;
+		height: 160px;
+		margin: 0 auto;
+		text-align: center;
+		cursor: default;
+		transition: 0.3s cubic-bezier(0.215, 0.610, 0.355, 1.000) all;
+
+		span {
+			font-size: 50px;
+			line-height: 160px;
+			transition: 0.3s cubic-bezier(0.215, 0.610, 0.355, 1.000) all;
+		}
+		&.yellow {
+			border-color: yellow;
+		}
+		&.green {
+			border-color: green;
+		}
+		&:hover {
+			width: 180px;
+			height: 180px;
+
+			span {
+				line-height: 180px;
+				font-size: 56px;
+			}
+		}
+	}
+}
+

@@ -49,6 +49,9 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.user.username
 
+    def dgddfhgdkjf(self):
+        return "POOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOL"
+
 
 class CashFlow(models.Model):
     DURATION_TYPE_CHOICES = (

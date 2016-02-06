@@ -46,6 +46,12 @@ class PoolLoanViewSet(viewsets.ModelViewSet):
     queryset = PoolLoan.objects.all()
     serializer_class = PoolLoanSerializer
 
+    # create
+    # list
+    # retrieve
+    # delete
+    #
+
 
 class PoolViewSet(viewsets.ModelViewSet):
     queryset = Pool.objects.all()

@@ -20,12 +20,30 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 # Serializers define the API representation.
 class UserProfileSerializer(serializers.ModelSerializer):
     user = serializers.HyperlinkedRelatedField(view_name='user-detail', queryset=User.objects.all())
+    pool = serializers.SerializerMethodField()
+
+    def get_pool(self, obj):
+        return obj.dgddfhgdkjf()
 
     class Meta:
         model = UserProfile
         fields = ('bank_key', 'title', 'date_of_birth', 'marital_status', 'sin',
                   'address', 'city', 'province', 'postal_code', 'residential_status', 'type',
-                  'user',)
+                  'user', 'pool',)
+
+# Serializers define the API representation.
+class UserProfileNoHyperlinkSerializer(serializers.ModelSerializer):
+    pool = serializers.SerializerMethodField()
+
+    def get_pool(self, obj):
+        return obj.dgddfhgdkjf()
+
+    class Meta:
+        model = UserProfile
+        fields = ('bank_key', 'title', 'date_of_birth', 'marital_status', 'sin',
+                  'address', 'city', 'province', 'postal_code', 'residential_status', 'type',
+                  'pool',)
+
 
 
 # Serializers define the API representation.

@@ -1,5 +1,5 @@
 #!/bin/bash
-git push heroku master
+git push --force heroku master
 heroku run python manage.py makemigrations
 heroku run python manage.py migrate
 heroku open

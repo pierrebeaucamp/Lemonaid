@@ -1,9 +1,7 @@
 from rest_framework import viewsets
 
-from apps.scotia.models import Debtor
-from apps.scotia.serializers import DebtorSerializer
-
-# Create your views here.
+from lemonaid.models import Debtor
+from lemonaid.serializers import DebtorSerializer
 
 # ViewSets define the view behavior.
 class DebtorViewSet(viewsets.ModelViewSet):

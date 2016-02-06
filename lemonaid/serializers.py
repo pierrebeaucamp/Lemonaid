@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.scotia.models import Debtor
+from lemonaid.models import Debtor
 
 # Serializers define the API representation.
 class DebtorSerializer(serializers.ModelSerializer):

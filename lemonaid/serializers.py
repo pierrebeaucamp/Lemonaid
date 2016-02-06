@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from django.contrib.auth.models import User, Group
 
-from lemonaid.models import UserProfile
+from lemonaid.models import UserProfile, Flow, Loan
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -26,3 +26,21 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ('bank_key', 'title', 'date_of_birth', 'marital_status', 'sin',
                   'address', 'city', 'province', 'postal_code', 'residential_status',
                   'user',)
+
+
+# Serializers define the API representation.
+class FlowSerializer(serializers.ModelSerializer):
+    profile = serializers.HyperlinkedRelatedField(view_name='UserProfiles-detail', queryset=UserProfile.objects.all())
+
+    class Meta:
+        model = Flow
+        fields = ('profile', 'name', 'flow_type', 'duration_type', 'amount',)
+
+
+# Serializers define the API representation.
+class LoanSerializer(serializers.ModelSerializer):
+    profile = serializers.HyperlinkedRelatedField(view_name='UserProfiles-detail', queryset=UserProfile.objects.all())
+
+    class Meta:
+        model = Loan
+        fields = ('profile', 'amount', 'interest', 'duration',)

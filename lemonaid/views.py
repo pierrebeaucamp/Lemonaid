@@ -2,8 +2,8 @@ from rest_framework import viewsets
 
 from django.contrib.auth.models import User, Group
 
-from lemonaid.models import UserProfile
-from lemonaid.serializers import UserProfileSerializer, UserSerializer, GroupSerializer
+from lemonaid.models import UserProfile, Flow, Loan
+from lemonaid.serializers import UserProfileSerializer, UserSerializer, GroupSerializer, FlowSerializer, LoanSerializer
 
 
 # Create your views here.
@@ -27,3 +27,15 @@ class GroupViewSet(viewsets.ModelViewSet):
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
+
+
+# ViewSets define the view behavior.
+class FlowViewSet(viewsets.ModelViewSet):
+    queryset = Flow.objects.all()
+    serializer_class = FlowSerializer
+
+
+# ViewSets define the view behavior.
+class LoanViewSet(viewsets.ModelViewSet):
+    queryset = Loan.objects.all()
+    serializer_class = LoanSerializer

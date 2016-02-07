@@ -33,8 +33,8 @@ class UserProfile(models.Model):
         ('c', 'creditor'),
     )
 
-    user = models.OneToOneField(User)
 
+    name = models.CharField(blank=True, null=True, max_length=254)
     bank_key = models.CharField(blank=True, null=True, max_length=254)
     title = models.CharField(max_length=254, choices=TITLE_CHOICES)
     date_of_birth = models.DateField()
@@ -48,11 +48,8 @@ class UserProfile(models.Model):
     type = models.CharField(max_length=254, choices=USER_TYPE_CHOICES)
     creditor_balance = models.FloatField(default=0)
 
-    def __unicode__(self):
-        return self.user.username
-
     def __str__(self):
-        return self.user.username
+        return
 
     def get_single_loan_total(self):
         total_sum = 0

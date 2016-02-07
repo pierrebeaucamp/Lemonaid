@@ -20,7 +20,6 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 # Serializers define the API representation.
 class UserProfileSerializer(serializers.ModelSerializer):
-    user = serializers.HyperlinkedRelatedField(view_name='user-detail', queryset=User.objects.all())
     single_loan_total = serializers.SerializerMethodField(read_only=True)
 
     def get_single_loan_total(self, obj):
@@ -28,9 +27,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = ('bank_key', 'title', 'date_of_birth', 'marital_status', 'sin',
+        fields = ('bank_key', 'name','title', 'date_of_birth', 'marital_status', 'sin',
                   'address', 'city', 'province', 'postal_code', 'residential_status', 'type',
-                  'user', 'single_loan_total', 'creditor_balance',)
+                   'single_loan_total', 'creditor_balance',)
 
 # Serializers define the API representation.
 class UserProfileNoHyperlinkSerializer(serializers.ModelSerializer):

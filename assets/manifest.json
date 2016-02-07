@@ -17,6 +17,6 @@
     }
   },
   "config": {
-      "devUrl": "http://localhost:5000/"
+    "devUrl": "http://scotiafront.local"
   }
 }

@@ -49,7 +49,9 @@
 }
 
 .sign-up-page {
-	
+	form[name="signupForm"] {
+		margin-bottom: 30px;
+	}
 	.header {
 		margin-bottom: 30px;
 	}

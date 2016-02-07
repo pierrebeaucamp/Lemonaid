@@ -2,21 +2,17 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-				<div class="logos">
-					<img src="/static/images/Lemon.png" alt="Lemonaid Logo" class="img-responsive">
-				</div>
-
-				<form name="homeForm" ng-submit="" class="bottom-bordered" novalidate>
-				    <fieldset>
-				    	<input name="amount" placeholder="How much do you need?" type="text" ng-model="info.amount" autofocus required>
-				    </fieldset>
-
-				    <fieldset>
-				    	<input name="employed" placeholder="Are you currently employed?" type="text" ng-model="info.employed" required>
+				<form name="homeForm" class="bottom-bordered bordered" novalidate>
+					<fieldset>
+				    	<input name="email" placeholder="Email Address" type="text" ng-model="info.email" autofocus required>
 				    </fieldset>
 
 					<fieldset>
-				    	<input name="rate" placeholder="What is your interest rate?" type="text" ng-model="info.rate" required>
+				    	<input name="password" placeholder="Password" type="password" ng-model="info.password" required>
+				    </fieldset>
+
+				    <fieldset>
+				    	<input name="amount" placeholder="How much do you need?" type="text" ng-model="info.amount" required>
 				    </fieldset>
 
 				    <fieldset>
@@ -25,21 +21,20 @@
 				</form>
 
 				<div class="submit">
-			    	<a href="/#/signup/" class="round-btn">Continue</a>
+			    	<button class="round-btn" ng-click="attemptNewAccountCreation()">Continue</button>
 			    </div>
 			</div>
 		</div>
 
 		<div class="row login-options">
 			<div class="col-sm-12">
-				<button class="round-btn facebook">Log in with Facebook</button>
 				<div class="spacer">or</div>
-				<button class="round-btn">Sign in</button>
+				<a href="/#/login/" class="round-btn">Sign in</a>
 			</div>
 
 			<div class="col-sm-12 slogan">
 				<p>When life gives you high interest loans, use</p>
-				<img src="/static/images/Lemon.png" alt="Lemonaid Logo" class="img-responsive">
+                <img src="/static/images/lemonaid.png" alt="Lemonaid Logo" class="img-responsive">
 			</div>
 		</div>
 	</div>

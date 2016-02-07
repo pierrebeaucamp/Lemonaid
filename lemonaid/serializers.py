@@ -30,7 +30,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = ('bank_key', 'title', 'date_of_birth', 'marital_status', 'sin',
                   'address', 'city', 'province', 'postal_code', 'residential_status', 'type',
-                  'user', 'single_loan_total',)
+                  'user', 'single_loan_total', 'creditor_balance',)
 
 # Serializers define the API representation.
 class UserProfileNoHyperlinkSerializer(serializers.ModelSerializer):
@@ -71,7 +71,10 @@ class SingleLoanSerializer(serializers.ModelSerializer):
     class Meta:
         model = SingleLoan
         fields = ('creditor', 'debitor', 'amount', 'interest', 'duration',)
-
+    def create(self, validated_data):
+        singleloan = super(SingleLoanSerializer, self).create(validated_data=validated_data)
+        singleloan.deduct_amount()
+        return singleloan
 
 # Serializers define the API representation.
 class PoolLoanSerializer(serializers.ModelSerializer):
@@ -80,6 +83,9 @@ class PoolLoanSerializer(serializers.ModelSerializer):
     class Meta:
         model = PoolLoan
         fields = ('creditor', 'amount', 'interest', 'duration',)
+    def create(self, validated_data):
+        poolloan = super(PoolLoanSerializer, self).create(validated_data=validated_data)
+        poolloan.deduct_amount()
 
 
 

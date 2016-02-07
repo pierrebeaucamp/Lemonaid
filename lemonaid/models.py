@@ -46,7 +46,7 @@ class UserProfile(models.Model):
     postal_code = models.CharField(max_length=6)
     residential_status = models.CharField(max_length=254, choices=RESIDENTIAL_STATUS_CHOICES)
     type = models.CharField(max_length=254, choices=USER_TYPE_CHOICES)
-    creditor_balance = models.FloatField(blank=True, null=True)
+    creditor_balance = models.FloatField(default=0)
 
     def __unicode__(self):
         return self.user.username
@@ -91,6 +91,14 @@ class SingleLoan(models.Model):
     duration = models.DurationField(default=timedelta(weeks=52))
     debitor_loan = models.ForeignKey('DebitorLoan', null=True)
 
+    def deduct_amount(self):
+        self.debitor_loan.amount = self.debitor_loan.amount - self.amount
+        print("Printing this {}".format(self.debitor_loan.amount))
+        self.creditor.creditor_balance = self.creditor.creditor_balance - self.amount
+        print("Printing this {}".format(self.creditor.creditor_balance))
+        self.debitor_loan.save()
+        self.creditor.save()
+
 
 class PoolLoan(models.Model):
     # creditors
@@ -99,6 +107,16 @@ class PoolLoan(models.Model):
     interest = models.FloatField(default=0)
     duration = models.DurationField(default=timedelta(weeks=52))
     debitor_loan = models.ForeignKey('DebitorLoan', null=True)
+
+    def deduct_amount(self):
+
+
+        distrubited_creditor_amount = self.amount / self.creditor.count()
+        for c in self.creditor:
+            c.creditor_balance = c.creditor_balance - distrubited_creditor_amount
+        self.debitor_loan.amount = self.debitor_loan.amount - self.amount
+        self.debitor_loan.save()
+        self.creditor.save()
 
 
 class Pool(models.Model):
